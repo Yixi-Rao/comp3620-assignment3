@@ -1,0 +1,99 @@
+p cnf 36 variables | 98 clauses
+27[lift-at f0 step0]  - start
+-17[boarded p0 step0]  - start
+-22[served p0 step0]  - start
+-32[lift-at f1 step0]  - start
+26[served p0 step4]  - goal
+-1[board f1 p0 step0] 32[lift-at f1 step0]  - pre
+-1[board f1 p0 step0] 18[boarded p0 step1]  - eff
+-2[board f1 p0 step1] 33[lift-at f1 step1]  - pre
+-2[board f1 p0 step1] 19[boarded p0 step2]  - eff
+-3[board f1 p0 step2] 34[lift-at f1 step2]  - pre
+-3[board f1 p0 step2] 20[boarded p0 step3]  - eff
+-4[board f1 p0 step3] 35[lift-at f1 step3]  - pre
+-4[board f1 p0 step3] 21[boarded p0 step4]  - eff
+-5[depart f0 p0 step0] 27[lift-at f0 step0]  - pre
+-5[depart f0 p0 step0] 17[boarded p0 step0]  - pre
+-5[depart f0 p0 step0] 23[served p0 step1]  - eff
+-5[depart f0 p0 step0] -18[boarded p0 step1]  - eff
+-6[depart f0 p0 step1] 28[lift-at f0 step1]  - pre
+-6[depart f0 p0 step1] 18[boarded p0 step1]  - pre
+-6[depart f0 p0 step1] 24[served p0 step2]  - eff
+-6[depart f0 p0 step1] -19[boarded p0 step2]  - eff
+-7[depart f0 p0 step2] 29[lift-at f0 step2]  - pre
+-7[depart f0 p0 step2] 19[boarded p0 step2]  - pre
+-7[depart f0 p0 step2] 25[served p0 step3]  - eff
+-7[depart f0 p0 step2] -20[boarded p0 step3]  - eff
+-8[depart f0 p0 step3] 30[lift-at f0 step3]  - pre
+-8[depart f0 p0 step3] 20[boarded p0 step3]  - pre
+-8[depart f0 p0 step3] 26[served p0 step4]  - eff
+-8[depart f0 p0 step3] -21[boarded p0 step4]  - eff
+-9[up f0 f1 step0] 27[lift-at f0 step0]  - pre
+-9[up f0 f1 step0] 33[lift-at f1 step1]  - eff
+-9[up f0 f1 step0] -28[lift-at f0 step1]  - eff
+-10[up f0 f1 step1] 28[lift-at f0 step1]  - pre
+-10[up f0 f1 step1] 34[lift-at f1 step2]  - eff
+-10[up f0 f1 step1] -29[lift-at f0 step2]  - eff
+-11[up f0 f1 step2] 29[lift-at f0 step2]  - pre
+-11[up f0 f1 step2] 35[lift-at f1 step3]  - eff
+-11[up f0 f1 step2] -30[lift-at f0 step3]  - eff
+-12[up f0 f1 step3] 30[lift-at f0 step3]  - pre
+-12[up f0 f1 step3] 36[lift-at f1 step4]  - eff
+-12[up f0 f1 step3] -31[lift-at f0 step4]  - eff
+-13[down f1 f0 step0] 32[lift-at f1 step0]  - pre
+-13[down f1 f0 step0] 28[lift-at f0 step1]  - eff
+-13[down f1 f0 step0] -33[lift-at f1 step1]  - eff
+-14[down f1 f0 step1] 33[lift-at f1 step1]  - pre
+-14[down f1 f0 step1] 29[lift-at f0 step2]  - eff
+-14[down f1 f0 step1] -34[lift-at f1 step2]  - eff
+-15[down f1 f0 step2] 34[lift-at f1 step2]  - pre
+-15[down f1 f0 step2] 30[lift-at f0 step3]  - eff
+-15[down f1 f0 step2] -35[lift-at f1 step3]  - eff
+-16[down f1 f0 step3] 35[lift-at f1 step3]  - pre
+-16[down f1 f0 step3] 31[lift-at f0 step4]  - eff
+-16[down f1 f0 step3] -36[lift-at f1 step4]  - eff
+17[boarded p0 step0] -18[boarded p0 step1] 1[board f1 p0 step0]  - frame
+-17[boarded p0 step0] 18[boarded p0 step1] 5[depart f0 p0 step0]  - frame
+18[boarded p0 step1] -19[boarded p0 step2] 2[board f1 p0 step1]  - frame
+-18[boarded p0 step1] 19[boarded p0 step2] 6[depart f0 p0 step1]  - frame
+19[boarded p0 step2] -20[boarded p0 step3] 3[board f1 p0 step2]  - frame
+-19[boarded p0 step2] 20[boarded p0 step3] 7[depart f0 p0 step2]  - frame
+20[boarded p0 step3] -21[boarded p0 step4] 4[board f1 p0 step3]  - frame
+-20[boarded p0 step3] 21[boarded p0 step4] 8[depart f0 p0 step3]  - frame
+22[served p0 step0] -23[served p0 step1] 5[depart f0 p0 step0]  - frame
+-22[served p0 step0] 23[served p0 step1]  - frame
+23[served p0 step1] -24[served p0 step2] 6[depart f0 p0 step1]  - frame
+-23[served p0 step1] 24[served p0 step2]  - frame
+24[served p0 step2] -25[served p0 step3] 7[depart f0 p0 step2]  - frame
+-24[served p0 step2] 25[served p0 step3]  - frame
+25[served p0 step3] -26[served p0 step4] 8[depart f0 p0 step3]  - frame
+-25[served p0 step3] 26[served p0 step4]  - frame
+27[lift-at f0 step0] -28[lift-at f0 step1] 13[down f1 f0 step0]  - frame
+-27[lift-at f0 step0] 28[lift-at f0 step1] 9[up f0 f1 step0]  - frame
+28[lift-at f0 step1] -29[lift-at f0 step2] 14[down f1 f0 step1]  - frame
+-28[lift-at f0 step1] 29[lift-at f0 step2] 10[up f0 f1 step1]  - frame
+29[lift-at f0 step2] -30[lift-at f0 step3] 15[down f1 f0 step2]  - frame
+-29[lift-at f0 step2] 30[lift-at f0 step3] 11[up f0 f1 step2]  - frame
+30[lift-at f0 step3] -31[lift-at f0 step4] 16[down f1 f0 step3]  - frame
+-30[lift-at f0 step3] 31[lift-at f0 step4] 12[up f0 f1 step3]  - frame
+32[lift-at f1 step0] -33[lift-at f1 step1] 9[up f0 f1 step0]  - frame
+-32[lift-at f1 step0] 33[lift-at f1 step1] 13[down f1 f0 step0]  - frame
+33[lift-at f1 step1] -34[lift-at f1 step2] 10[up f0 f1 step1]  - frame
+-33[lift-at f1 step1] 34[lift-at f1 step2] 14[down f1 f0 step1]  - frame
+34[lift-at f1 step2] -35[lift-at f1 step3] 11[up f0 f1 step2]  - frame
+-34[lift-at f1 step2] 35[lift-at f1 step3] 15[down f1 f0 step2]  - frame
+35[lift-at f1 step3] -36[lift-at f1 step4] 12[up f0 f1 step3]  - frame
+-35[lift-at f1 step3] 36[lift-at f1 step4] 16[down f1 f0 step3]  - frame
+-5[depart f0 p0 step0] -9[up f0 f1 step0]  - mutex
+-6[depart f0 p0 step1] -10[up f0 f1 step1]  - mutex
+-7[depart f0 p0 step2] -11[up f0 f1 step2]  - mutex
+-8[depart f0 p0 step3] -12[up f0 f1 step3]  - mutex
+-1[board f1 p0 step0] -13[down f1 f0 step0]  - mutex
+-2[board f1 p0 step1] -14[down f1 f0 step1]  - mutex
+-3[board f1 p0 step2] -15[down f1 f0 step2]  - mutex
+-4[board f1 p0 step3] -16[down f1 f0 step3]  - mutex
+-1[board f1 p0 step0]  - reach
+-5[depart f0 p0 step0]  - reach
+-6[depart f0 p0 step1]  - reach
+-7[depart f0 p0 step2]  - reach
+-13[down f1 f0 step0]  - reach

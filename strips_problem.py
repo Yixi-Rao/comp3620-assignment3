@@ -8,14 +8,14 @@
     There is a Problem, which has a start state and goal and lists of
     actions and propositions.
 
-    Each Action has a precondition and positive and negative effect.
+    NOTE Each Action has a precondition and positive and negative effect.
     These are lists of Propositions.
 
-    Each Propositions has a list of Actions for which it is a precondition,
+    NOTE Each Propositions has a list of Actions for which it is a precondition,
     a positive and a negative effect.
 
     self.action_first_step will either be None (in which case you will not have to deal with it)
-    otherwise it will be a dictionary {Action : int} mapping each action
+    otherwise it #! will be a dictionary {Action : int} mapping each action
     to the first step it could possible be executed (as computed by the plangraph).
 
     self.fluent_mutex will either be None (in which case you will not have to deal with it)
