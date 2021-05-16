@@ -132,8 +132,6 @@ class BasicEncoding(Encoding):
                 p_int = self.new_cnf_code(s, str(pro), pro)
                 self.proposition_fluent_codes[(pro, s)] = p_int
         
-            
-
     def make_initial_state_and_goal_axioms(self, horizon: int) -> None:
         """ Make clauses representing the initial state and goal.
 
@@ -216,7 +214,6 @@ class BasicEncoding(Encoding):
             for neg_e in neg_effs:
                 self.add_clause([-1 * a_int, -1 * self.proposition_fluent_codes[(neg_e, step + 1)]], "eff")
 
-
     def make_explanatory_frame_axioms(self, horizon: int) -> None:
         """ Make clauses representing explanatory frame axioms.
 
@@ -280,18 +277,21 @@ class BasicEncoding(Encoding):
 
             These clauses have the type "mutex".
         """
-        for act in self.problem.actions:
-            pos_effs = set(act.pos_effects)
-            print(pos_effs)
-            for other_act in self.problem.actions:
-                oth_neg_effs = set(other_act.neg_effects)
+        clauses_delete = set()
+        for prop in self.problem.propositions:
+            acts_neg  = set(prop.neg_effects)
+            acts_pos  = set(prop.pos_effects)
+        
+            for a1, a2 in itertools.product(acts_pos, acts_neg):
+                clauses_delete.add((a1, a2))
+        
+        for a1, a2 in itertools.combinations(self.problem.actions, 2):
+            if (a1, a2) not in clauses_delete and (a2, a1) not in clauses_delete:
+                for step in range(0, horizon):
+                    a1_int = self.action_fluent_codes[(a1, step)]
+                    a2_int = self.action_fluent_codes[(a2, step)]
+                    self.add_clause([-1 * a1_int, -1 * a2_int], "mutex")
                 
-                if act != other_act and len(pos_effs.intersection(oth_neg_effs)) != 0 :
-                    for step in range(0, horizon):
-                        oth_int = self.action_fluent_codes[(other_act, step)]
-                        a_int   = self.action_fluent_codes[(act, step)]
-                        self.add_clause([-1 * oth_int, -1 * a_int], "mutex")
-
     def make_interference_mutex_axioms(self, horizon: int) -> None:
         """ Make clauses preventing interfering actions from being executed in parallel.
 
@@ -331,7 +331,6 @@ class BasicEncoding(Encoding):
 
             for a1, a2 in itertools.product(acts_pre, acts_neg):
                 if (a1, a2) not in clauses_act and (a2, a1) not in clauses_act:
-                        
                     clauses_act.add((a1, a2))
             
             for a1, a2 in itertools.product(acts_pos, acts_neg):
@@ -346,7 +345,6 @@ class BasicEncoding(Encoding):
                     a2_int = self.action_fluent_codes[(a2, i)]
                     self.add_clause([-1 * a1_int, -1 * a2_int], "mutex")
                
-
     def make_reachable_action_axioms(self, horizon: int) -> None:
         """ Make unit clauses preventing actions from being executed before they
             become available in the plangraph.
@@ -370,7 +368,7 @@ class BasicEncoding(Encoding):
 
             These clauses have the type "reach".
         """
-        print("SSSSSSSSSSSSSSSSSSS")
+        
         for act in self.problem.actions:
             reach_step = self.problem.action_first_step[act]
             
@@ -391,10 +389,10 @@ class BasicEncoding(Encoding):
             planning faster by causing the SAT solver to backtrack earlier.
 
             NOTE The dictionary #! self.problem.fluent_mutex maps integers representing
-            planning steps to lists of proposition mutex relationships at each
+            #! planning steps to lists of proposition mutex relationships at each
             step from 1...n, where n is the step that the plangraph levels off.
             Note that the dictionary doesn't contain steps greater than n,
-            because the relationships at step n also hold for every step
+            #! because the relationships at step n also hold for every step
             greater than n. Thus you can get those mutex relationships by
             querying the dictionary with step n.
 
@@ -425,8 +423,20 @@ class BasicEncoding(Encoding):
 
             These clauses have the type "fmutex".
         """
-
-        """ *** YOUR CODE HERE *** """
+        #? {1: [(lift-at f0, lift-at f1)],
+        # ? 2: [(boarded p0, lift-at f0), (lift-at f0, lift-at f1)],
+        # ? 3: [(lift-at f0, lift-at f1)],
+        # ? 4: [(boarded p0, served p0), (lift-at f0, lift-at f1), (lift-at f1, served p0)],
+        # ? 5: [(boarded p0, served p0), (lift-at f0, lift-at f1)], 
+        # ? 6: [(lift-at f0, lift-at f1)]}
+        
+        for s in range(1, horizon + 1):
+            if s in self.problem.fluent_mutex:
+                flu_mutex_list = self.problem.fluent_mutex[s]
+                for f1, f2 in flu_mutex_list:
+                    f1_int = self.proposition_fluent_codes[(f1, s)]
+                    f2_int = self.proposition_fluent_codes[(f2, s)]
+                    self.add_clause([-1 * f1_int, -1 * f2_int], "fmutex")
 
     def build_plan(self, horizon: int) -> None:
         """Build a plan from the true variables in a satisfying valuation found
@@ -450,22 +460,35 @@ class BasicEncoding(Encoding):
            You should add the plan to self.plan, which has the structure
            [action_list, action_list, ...].
 
-           For each step t = 0..k-1, it has a (possibly empty) list of the
-           actions which were executed at that step.
+           #! For each step t = 0..k-1, it has a (possibly empty) list of the
+           #! actions which were executed at that step.
 
            So, if we have a0 and a1 at step 0 and a2 at step 2, then self.plan
            will be:
 
                [[a0, a1], [], [a2]]
 
-           where a0, a1, a2, etc. are Action objects (not just their names).
+           where a0, a1, a2, etc. #! are Action objects (not just their names).
 
            The system will validate the plans you generate, so make sure you
            test your encodings on a number of different problems.
         """
         self.plan: List[List[Action]] = []
-
-        """ *** YOUR CODE HERE *** """
+        action_dict = {}
+        for code in self.true_vars:
+            is_act = isinstance(self.cnf_code_objects[code], Action)
+            if is_act:
+                act_step = self.cnf_code_steps[code]
+                act_obj  = self.cnf_code_objects[code]
+                if act_step not in action_dict:
+                    action_dict[act_step] = [act_obj]
+                else:
+                    action_dict[act_step].append(act_obj)
+        for s in range(0, horizon):
+            if s not in action_dict:
+                self.plan.append([])
+            else:
+                self.plan.append(action_dict[s])
 
 ################################################################################
 #                    Do not change the following method                        #
