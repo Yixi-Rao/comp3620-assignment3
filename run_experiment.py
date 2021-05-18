@@ -1,6 +1,6 @@
 import os
 import itertools
-# from matplotlib import pyplot as plt
+from matplotlib import pyplot as plt
 import math
 
 class experiment:
@@ -229,10 +229,15 @@ class experiment:
         plt.show()
                        
 if __name__ == '__main__':
-    
-    run_which = "rovers"
+    '''Instruction: if you want to collect the rovers' domain data, change the run_which to "rovers"
+                    if you want to collect the blocks' domain data, change the run_which to "blocks"
+                    if you want to collect the miconic's domain data, change the run_which to "miconic"
+                    if you want to check the graph, change the run_which to "graph"
+                        - undo comment the domain you want to test (check the else clause below)
+    '''
+    run_which = "rovers" #? avaliable value = {"rovers", "miconic", "blocks", "graph"}
     settings  = {"-p false -l both", "-p true -l fmutex","-p true -l reachable", "-p true -l both"}
-    modes     = {"parallel"} # , "serial"
+    modes     = {"parallel", "serial"} # 
     
     if run_which == "miconic":
         dir_miconic = "log_miconic"
