@@ -371,8 +371,8 @@ class BasicEncoding(Encoding):
         
         for act in self.problem.actions:
             reach_step = self.problem.action_first_step[act]
-            
-            for s in range(0, reach_step):
+            non_step = reach_step if reach_step <= horizon else horizon
+            for s in range(0, non_step):
                 a_int = self.action_fluent_codes[(act, s)]
                 self.add_clause([-1 * a_int], "reach")
 
