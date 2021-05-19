@@ -160,7 +160,7 @@ class LogisticsEncoding(BasicEncoding):
                 self.add_clause([-1 * g_int, n_int], "control")
 
         #? Rule 2 
-        #* in a city, a truck(or an airplane) appears at one and only one location(or airport) at a time step
+        #* in a city, a truck(or an airplane) appears at one and only one location(or airport) in a time step
         #! at(truck, loc_x)@t -> (any loc_y: loc_x != loc_y) -at(truck, loc_y)@t 
         #! at(plane, loc_x)@t -> (any loc_y: loc_x != loc_y) -at(plane, loc_y)@t 
         # truck clauses
@@ -189,7 +189,7 @@ class LogisticsEncoding(BasicEncoding):
                         self.add_clause([-1 * p_int, -1 * p1_loc2_int], "control")
         
         #? Rule 3 
-        #* Do not unload an package from an airplane if the airplane is not in the package goal city
+        #* Do not unload a package from an airplane if the airplane is not in the package goal city
         #! any plane, any loc, any pac: -correct_city(pac, loc)@t ^ at(plane, loc)@t ^ in(pac, plane)@t -> in(pac, plane)@t+1
         
         for pln, loc, pac in itertools.product(all_planes, airport_locs, all_pacs):
