@@ -1,0 +1,62 @@
+gistics/problem03.pddl logistics03 10:20:1 -q ramp -e logistics
+Starting SAT-based planner...
+Checking for plugins...
+Encodings registered:    3
+Solvers registered:      1
+Command line options:
+    Domain file:          benchmarks/logistics/domain.pddl
+    Problem file:         benchmarks/logistics/problem03.pddl
+    Experiment name:      logistics03
+    Query strategy:        ramp, min_h = 10 max_h = 20 step_h = 1
+    Compute plangraph:     False
+    Plangraph constraints: both
+    Encoding:              logistics
+    Solver                 precosat
+    SAT solver time out    None
+    Write debug CNF:       False
+    Remove tmp files:      False
+Command line arg processing time: 0.013462305068969727
+Parsing the PDDL domain...
+Parsing the PDDL problem...
+Simplifying the problem representation...
+Parsing time: 0.15402674674987793
+Grounding the problem...
+Grounding time: 0.1208963394165039
+Simplifying the ground encoding...
+Simplify time: 0.12340736389160156
+Planning...
+
+Step: 10
+-------------------------------------------------
+Generating base encoding: logistics ...
+Encoding generation time: 0.48490333557128906
+Writing CNF file...
+Total variables: 32778
+Total clauses: 356727
+Writing time: 0.20347309112548828
+SAT
+Solution time:  0.5478341579437256
+Plan valid. 107 actions.
+Step time: 1.2869715690612793
+Total time: 1.716848373413086
+
+================================================================================================================================================
+
+Command line arg processing time: 0.01327657699584961
+Parsing time: 0.15035486221313477
+Grounding time: 0.1034092903137207
+Simplify time: 0.13654375076293945
+
+Step: 10
+-------------------------------------------------
+Generating base encoding: logistics ...
+Encoding generation time: 0.5369856357574463
+Writing CNF file...
+Total variables: 32778
+Total clauses: 356727
+Writing time: 0.20942115783691406
+SAT
+Solution time:  0.581641674041748
+Plan valid. 107 actions.
+Step time: 1.369551420211792
+Total time: 1.790147304534912

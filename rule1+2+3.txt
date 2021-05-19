@@ -1,0 +1,40 @@
+gistics/problem03.pddl logistics03 10:20:1 -q ramp -e logistics
+Starting SAT-based planner...
+Checking for plugins...
+Encodings registered:    3
+Solvers registered:      1
+Command line options:
+    Domain file:          benchmarks/logistics/domain.pddl
+    Problem file:         benchmarks/logistics/problem03.pddl
+    Experiment name:      logistics03
+    Query strategy:        ramp, min_h = 10 max_h = 20 step_h = 1
+    Compute plangraph:     False
+    Plangraph constraints: both
+    Encoding:              logistics
+    Solver                 precosat
+    SAT solver time out    None
+    Write debug CNF:       False
+    Remove tmp files:      False
+Command line arg processing time: 0.01414942741394043
+Parsing the PDDL domain...
+Parsing the PDDL problem...
+Simplifying the problem representation...
+Parsing time: 0.15362119674682617
+Grounding the problem...
+Grounding time: 0.1043241024017334
+Simplifying the ground encoding...
+Simplify time: 0.11988615989685059
+Planning...
+
+Step: 10
+-------------------------------------------------
+Generating base encoding: logistics ...
+Encoding generation time: 0.48607611656188965
+Total variables: 32778
+Total clauses: 359103
+Writing time: 0.19851422309875488
+SAT
+Solution time:  0.5385744571685791
+Plan valid. 106 actions.
+Step time: 1.2703120708465576
+Total time: 1.6802208423614502
